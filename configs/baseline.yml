@@ -1,0 +1,44 @@
+data:
+  dataset: "MOF"
+  image_size: 64
+  channels: 3
+  data_dir: "/usr/local/faststorage/datasets/MOF/"
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  input_normalization: true
+  target_normalization: true
+  x_min: 0.0
+  x_max: 5200.0
+  x_mean: 4.7969
+  x_std: 28.2280
+  wc_mean: 0.6521
+  wc_std: 0.6277
+  sel_mean: 34.1554
+  sel_std: 40.0400
+
+model:
+  type: "resnet18"
+  dropout_rate: 0.0
+
+training:
+  batch_size: 512
+  n_epochs: 500
+  validation_freq: 10
+  patience: 10
+  density_reweighing: false
+
+optim:
+  weight_decay: 0.000
+  optimizer: "Adam"
+  lr: 0.0015
+  beta1: 0.9
+  amsgrad: false
+  eps: 0.00000001
+  grad_clip: 1.0
+
+validation:
+  batch_size: 512
+
+testing:
+  batch_size: 512

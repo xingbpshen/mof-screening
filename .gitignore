@@ -1,0 +1,17 @@
+log/
+data/
+.DS_Store
+.idea/
+plot.ipynb
+figs/
+__pycache__/
+CIF_to_npy.py
+dataset.py
+model.py
+mytest.py
+output.txt
+output_file.csv
+predict.csv
+predict.py
+train.py
+runs/
