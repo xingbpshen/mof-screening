@@ -1,0 +1,6 @@
+torch~=2.2.0
+numpy~=2.1.3
+PyYAML~=6.0.2
+scikit-learn~=1.5.2
+matplotlib~=3.9.2
+spconv-cu120

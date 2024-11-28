@@ -54,6 +54,9 @@ def get_dataset(args, config):
         test_dataset = MOFDataset(x_test, y_wc_test, y_sel_test, x_stats=(x_mean, x_std), wc_stats=(y_wc_mean, y_wc_std),
                                   sel_stats=(y_sel_mean, y_sel_std), input_normalization=config.data.input_normalization,
                                    target_normalization=config.data.target_normalization)
+        print(f"Train size: {len(train_dataset)}")
+        print(f"Validation size: {len(val_dataset)}")
+        print(f"Test size: {len(test_dataset)}")
 
         return train_dataset, val_dataset, test_dataset
 
