@@ -58,10 +58,11 @@ class Runner:
         for epoch in range(self.config.training.n_epochs):
             for i, (x, wc, sel, weights_wc, weights_sel) in enumerate(train_loader):
 
-                # # Calculate the ratio of zero values in the input
-                # zero_ratio = (x == 0).sum() / x.numel()
-                # print(f"Zero ratio: {zero_ratio}")
+                # Add noise to the input
+                if self.config.training.add_input_noise > 0.0:
+                    x = x + self.config.training.add_input_noise * torch.randn_like(x)
 
+                # Density reweighing
                 if self.config.training.density_reweighing:
                     weights_wc, weights_sel = compute_weights(wc.clone()), compute_weights(sel.clone())
 
@@ -166,6 +167,7 @@ class Runner:
                 gt_sel.append(sel)
                 if self.args.mc_dropout > 0:
                     # TODO: Implement MC Dropout based on model.sample(x=x, n_samples=self.args.mc_dropout)
+                    wcs, sels = model.sample(x=x, n_samples=self.args.mc_dropout)
                     raise NotImplementedError("MC Dropout not implemented")
                 else:
                     hat_wc.append(model(x)[0])

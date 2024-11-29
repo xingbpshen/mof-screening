@@ -18,7 +18,7 @@ data:
   sel_std: 40.0400
 
 model:
-  type: "sparse"
+  type: "resnet18"
   dropout_rate: 0.0
 
 training:
@@ -27,11 +27,12 @@ training:
   validation_freq: 10
   patience: 10
   density_reweighing: false
+  add_input_noise: 0.01
 
 optim:
   weight_decay: 0.000
   optimizer: "Adam"
-  lr: 0.0002
+  lr: 0.0015
   beta1: 0.9
   amsgrad: false
   eps: 0.00000001

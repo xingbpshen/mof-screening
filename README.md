@@ -2,7 +2,7 @@
 
 This repository contains the code and data for the technical report "Scalable and Robust Metal-organic Frameworks Screening for Carbon Capture and Storage" by X. Shen and A. Saxena. This report is a part of the final course project for the _COMP 685 Machine Learning Applied to Climate Change_ at McGill University.
 
-## Aknowledgements
+## Acknowledgements
 
 The authors would like to thank Prof. David Rolnick for his guidance and support throughout the project. Also, we would like to thank the authors of the paper "Deep-Learning-Based End-to-End Predictions of CO2 Capture in Metal–Organic Frameworks" (C. Lu _et al._) for providing the data used in this project.
 
@@ -25,7 +25,7 @@ The configurations for the experiments are stored in the `configs` folder. You c
 ```
 python main.py --config {METHOD}.yml --exp {PROJECT_PATH} --doc {TAG} --train
 ```
-where `METHOD` is the method's name (e.g., `baseline` or `sparse`), `PROJECT_PATH` is the path to store the experiment results (e.g., `./log`). The `--train` option is used to train the model. All training information will be stored in the `PROJECT_PATH/TAG/`.
+where `METHOD` is the method's name (e.g., `resnet` or `sparse`), `PROJECT_PATH` is the path to store the experiment results (e.g., `./log`). The `--train` option is used to train the model. All training information will be stored in the `PROJECT_PATH/TAG/`.
 2. Then, test the model using the following command:
 ```
 python main.py --config {METHOD}.yml --exp {PROJECT_PATH} --doc {TAG} --test

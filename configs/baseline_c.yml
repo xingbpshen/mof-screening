@@ -19,14 +19,15 @@ data:
 
 model:
   type: "sparse"
-  dropout_rate: 0.1
+  dropout_rate: 0.0
 
 training:
   batch_size: 512
   n_epochs: 500
   validation_freq: 10
   patience: 10
-  density_reweighing: true
+  density_reweighing: false
+  add_input_noise: 0.0
 
 optim:
   weight_decay: 0.000
