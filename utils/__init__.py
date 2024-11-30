@@ -15,6 +15,9 @@ class SimpleLogger:
     def save_model_checkpoint(self, model, epoch):
         torch.save(model.state_dict(), os.path.join(self.log_path, f"best_model_epoch_{epoch}.pt"))
 
+    def save_tensor_as_np(self, tensor, filename):
+        np.save(os.path.join(self.log_path, filename), tensor.numpy())
+
 
 class ToTensorTransform:
     def __call__(self, data):

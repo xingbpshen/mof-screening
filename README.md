@@ -4,7 +4,7 @@ This repository contains the code and data for the technical report "Scalable an
 
 ## Acknowledgements
 
-The authors would like to thank Prof. David Rolnick for his guidance and support throughout the project. Also, we would like to thank the authors of the paper "Deep-Learning-Based End-to-End Predictions of CO2 Capture in Metal–Organic Frameworks" (C. Lu _et al._) for providing the data used in this project.
+The authors would like to thank Prof. David Rolnick for his guidance and support throughout the project. Also, we would like to thank the authors of the paper "Deep-Learning-Based End-to-End Predictions of CO2 Capture in Metal–Organic Frameworks" (C. Lu _et al._) and "High-performing deep learning regression models for predicting low-pressure CO2 adsorption properties of metal–organic frameworks" (J. Burner _et al._) for providing the data used in this project.
 
 ## Data
 
@@ -37,6 +37,6 @@ Coming soon
 
 ## References
 - Lu, C., Wan, X., Ma, X., Guan, X., & Zhu, A. (2022). Deep-Learning-Based End-to-End Predictions of CO2 Capture in Metal–Organic Frameworks. Journal of Chemical Information and Modeling, 62(14), 3281-3290.
-
+- Burner, J., Schwiedrzik, L., Krykunov, M., Luo, J., Boyd, P. G., & Woo, T. K. (2020). High-performing deep learning regression models for predicting low-pressure CO2 adsorption properties of metal–organic frameworks. The Journal of Physical Chemistry C, 124(51), 27996-28005.
 
 

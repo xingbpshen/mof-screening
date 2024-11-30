@@ -27,10 +27,19 @@ def get_dataset(args, config):
                 y_wc.append(float(y_label_wc[i[:-4]]))
                 y_sel.append(float(y_label_sel[i[:-4]]))
         y_wc, y_sel = np.array(y_wc), np.array(y_sel)
+
         # Load stats
         x_mean, x_std = config.data.x_min, (config.data.x_max - config.data.x_min)
         y_wc_mean, y_wc_std = config.data.wc_mean, config.data.wc_std
         y_sel_mean, y_sel_std = config.data.sel_mean, config.data.sel_std
+
+        # # Save y_wc and y_sel
+        # y_wc = (y_wc - y_wc_mean) / y_wc_std
+        # y_sel = (y_sel - y_sel_mean) / y_sel_std
+        # np.save(os.path.join('./figs/', 'y_wc.npy'), y_wc)
+        # np.save(os.path.join('./figs/', 'y_sel.npy'), y_sel)
+        # exit()
+
         # Split the data into training, validation, and testing sets, according to the specified ratios in config.data
         x_train, x_temp, y_wc_train, y_wc_temp, y_sel_train, y_sel_temp = train_test_split(
             x_path, y_wc, y_sel, test_size=(1.0 - config.data.train_ratio), random_state=42, shuffle=True

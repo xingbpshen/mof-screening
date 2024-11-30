@@ -157,6 +157,9 @@ class Runner:
         gt_sel = []
         hat_wc = []
         hat_sel = []
+        if self.args.mc_dropout > 0:
+            uncertainty_wc = []
+            uncertainty_sel = []
         with torch.no_grad():
             for i, (x, wc, sel, _, _) in enumerate(test_loader):
                 x, wc, sel = x.to(self.device), wc.to(self.device), sel.to(self.device)
@@ -167,8 +170,13 @@ class Runner:
                 gt_sel.append(sel)
                 if self.args.mc_dropout > 0:
                     # TODO: Implement MC Dropout based on model.sample(x=x, n_samples=self.args.mc_dropout)
-                    wcs, sels = model.sample(x=x, n_samples=self.args.mc_dropout)
-                    raise NotImplementedError("MC Dropout not implemented")
+                    wcs, sels = model.sample(x=x, n_samples=self.args.mc_dropout)   # wcs, sels: (batch_size, n_samples)
+                    mean_wc, mean_sel = wcs.mean(dim=1), sels.mean(dim=1)
+                    unbiased_var_wc, unbiased_var_sel = wcs.var(dim=1, unbiased=True), sels.var(dim=1, unbiased=True)
+                    hat_wc.append(mean_wc)
+                    hat_sel.append(mean_sel)
+                    uncertainty_wc.append(unbiased_var_wc)
+                    uncertainty_sel.append(unbiased_var_sel)
                 else:
                     hat_wc.append(model(x)[0])
                     hat_sel.append(model(x)[1])
@@ -180,12 +188,23 @@ class Runner:
         gt_sel = torch.cat(gt_sel, dim=0).cpu().numpy()
         hat_wc = torch.cat(hat_wc, dim=0).cpu().numpy()
         hat_sel = torch.cat(hat_sel, dim=0).cpu().numpy()
+        if self.args.mc_dropout > 0:
+            uncertainty_wc = torch.cat(uncertainty_wc, dim=0).cpu().numpy()
+            uncertainty_sel = torch.cat(uncertainty_sel, dim=0).cpu().numpy()
+
         # Metrics computation
         metrics_wc = compute_metrics(gt_wc, hat_wc)
         metrics_sel = compute_metrics(gt_sel, hat_sel)
         # Logging
         self.local_logger.log(f"Metrics for wc: \n {metrics_wc}")
         self.local_logger.log(f"Metrics for sel: \n {metrics_sel}")
+        self.local_logger.save_tensor_as_np(gt_wc, "gt_wc.npy")
+        self.local_logger.save_tensor_as_np(hat_wc, "hat_wc.npy")
+        self.local_logger.save_tensor_as_np(gt_sel, "gt_sel.npy")
+        self.local_logger.save_tensor_as_np(hat_sel, "hat_sel.npy")
+        if self.args.mc_dropout > 0:
+            self.local_logger.save_tensor_as_np(uncertainty_wc, "uncertainty_wc.npy")
+            self.local_logger.save_tensor_as_np(uncertainty_sel, "uncertainty_sel.npy")
         # Plot
         plot_gt_pred(gt_wc, hat_wc, 'Capacity', os.path.join(self.log_path, 'gt_pred_wc.pdf'))
         plot_gt_pred(gt_sel, hat_sel, 'Selectivity', os.path.join(self.log_path, 'gt_pred_sel.pdf'))
