@@ -29,7 +29,7 @@ The configurations for the experiments are stored in the `configs` folder. You c
 ```
 python main.py --config {METHOD}.yml --exp {PROJECT_PATH} --doc {TAG} --train
 ```
-where `METHOD` is the method's name (e.g., `resnet` or `sparse`), `PROJECT_PATH` is the path to store the experiment results (e.g., `./log`). The `--train` option is used to train the model. All training information will be stored in the `PROJECT_PATH/TAG/`.
+where `METHOD` is the method's name (e.g., `baseline_a` or `baseline_b`), `PROJECT_PATH` is the path to store the experiment results (e.g., `./log`). The `--train` option is used to train the model. All training information will be stored in the `PROJECT_PATH/TAG/`.
 
 2. Then, test the model using the following command:
 ```
