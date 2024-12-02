@@ -170,7 +170,7 @@ class Runner:
                 gt_sel.append(sel)
                 if self.args.mc_dropout > 0:
                     # TODO: Implement MC Dropout based on model.sample(x=x, n_samples=self.args.mc_dropout)
-                    wcs, sels = model.sample(x=x, n_samples=self.args.mc_dropout)   # wcs, sels: (batch_size, n_samples)
+                    wcs, sels = model.module.sample(x=x, n_samples=self.args.mc_dropout)   # wcs, sels: (batch_size, n_samples)
                     mean_wc, mean_sel = wcs.mean(dim=1), sels.mean(dim=1)
                     unbiased_var_wc, unbiased_var_sel = wcs.var(dim=1, unbiased=True), sels.var(dim=1, unbiased=True)
                     hat_wc.append(mean_wc)

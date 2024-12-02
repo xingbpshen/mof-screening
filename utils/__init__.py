@@ -16,7 +16,9 @@ class SimpleLogger:
         torch.save(model.state_dict(), os.path.join(self.log_path, f"best_model_epoch_{epoch}.pt"))
 
     def save_tensor_as_np(self, tensor, filename):
-        np.save(os.path.join(self.log_path, filename), tensor.numpy())
+        if not isinstance(tensor, np.ndarray):
+            tensor = tensor.numpy()
+        np.save(os.path.join(self.log_path, filename), tensor)
 
 
 class ToTensorTransform:

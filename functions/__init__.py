@@ -45,7 +45,7 @@ def compute_densities(x, bandwidth=0.5):
 #     # Add epsilon for stability
 #     weights += 1e-6
 #     return weights
-def compute_weights(x, bandwidth=0.5, lower_percentile=5, upper_percentile=95):
+def compute_weights(x, bandwidth=0.5, lower_percentile=2, upper_percentile=98):
     densities = compute_densities(x, bandwidth)
     # Reweight the loss using inverse densities
     weights = 1.0 / (densities + 1e-6)  # Add epsilon for stability
@@ -56,8 +56,8 @@ def compute_weights(x, bandwidth=0.5, lower_percentile=5, upper_percentile=95):
     upper_bound = np.percentile(weights_np, upper_percentile)
     # Clip weights to the computed bounds
     weights = torch.clamp(weights, min=lower_bound, max=upper_bound)
-    # Normalize weights to have a mean of 1
-    weights = weights / torch.mean(weights)
+    # Make the minimum weight is 1
+    weights /= torch.min(weights)
     # Detach weights from the computation graph
     weights = weights.detach()
 
@@ -104,6 +104,8 @@ def plot_gt_pred(y_true: np.ndarray, y_pred: np.ndarray, variable_name=None, sav
     # Add labels and title
     plt.xlabel(f'Ground-truth {variable_name}', fontsize=20)
     plt.ylabel(f'Predicted {variable_name}', fontsize=20)
+    # Adjust the tick labels size
+    plt.tick_params(axis='both', labelsize=20)
     # plt.title('Ground-truth vs Predicted Values')
     plt.legend()
 
