@@ -19,7 +19,7 @@ data:
 
 model:
   type: "resnet18"
-  dropout_rate: 0.1
+  dropout_rate: 0.3
 
 training:
   batch_size: 512

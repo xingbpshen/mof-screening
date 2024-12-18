@@ -49,7 +49,6 @@ class Model(torch.nn.Module):
                 wc, sel = self.model(x)  # Forward pass
                 wcs.append(wc)  # Collect wc
                 sels.append(sel)  # Collect sel
-
         # Stack predictions along a new dimension
         wcs = torch.stack(wcs, dim=1)  # Shape: (batch_size, n_samples)
         sels = torch.stack(sels, dim=1)  # Shape: (batch_size, n_samples)

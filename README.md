@@ -1,4 +1,6 @@
-# Scalable and Robust Metal-organic Frameworks Screening for Carbon Capture and Storage
+<h1 align="center">
+Scalable and Robust Metal-organic Frameworks Screening for Carbon Capture and Storage
+</h1>
 
 This repository contains the code and data for the technical report "Scalable and Robust Metal-organic Frameworks Screening for Carbon Capture and Storage" by X. Shen and A. Saxena. This report is a part of the final course project for the _COMP 685 Machine Learning Applied to Climate Change_ at McGill University.
 
